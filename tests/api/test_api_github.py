@@ -1,12 +1,15 @@
+import pytest
 import uuid
 import requests
 import allure
+from config import GITHUB_API_URL, GITHUB_TOKEN
 
 
-base_url = "https://api.github.com"
-token = "ВВЕСТИ_СВОЙ_ТОКЕН"
+base_url = GITHUB_API_URL
+token = GITHUB_TOKEN
 
 
+@pytest.mark.api
 @allure.title("Авторизация в GitHub")
 @allure.description(
     "Тест проверяет авторизацию пользователя в GitHub"
@@ -31,6 +34,7 @@ def test_positive_auth() -> None:
         assert resp.status_code == 200
 
 
+@pytest.mark.api
 @allure.title("Создание репозитория")
 @allure.description(
     "Тест проверяет создание репозитория"
@@ -79,6 +83,7 @@ def test_positive_create_repo() -> None:
         assert delete_resp.status_code == 204
 
 
+@pytest.mark.api
 @allure.title("Редактирование описания репозитория")
 @allure.description(
     "Тест проверяет изменение описания репозитория"
@@ -156,6 +161,7 @@ def test_positive_change_desc() -> None:
             assert delete_resp.status_code == 204
 
 
+@pytest.mark.api
 @allure.title("Удаление репозитория")
 @allure.description(
     "Тест проверяет удаление репозитория"
@@ -204,6 +210,7 @@ def test_positive_delete_repo() -> None:
         assert resp.status_code == 204
 
 
+@pytest.mark.api
 @allure.title("Авторизация в GitHub без токена")
 @allure.description(
     "Тест проверяет авторизацию пользователя в GitHub "
@@ -231,6 +238,7 @@ def test_negative_auth() -> None:
         assert resp.status_code == 401
 
 
+@pytest.mark.api
 @allure.title("Удаление несуществующего репозитория")
 @allure.description(
     "Тест проверяет удаление несуществующего репозитория"

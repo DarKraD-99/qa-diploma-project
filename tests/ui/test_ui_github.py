@@ -22,6 +22,7 @@ def driver():
     driver.quit()
 
 
+@pytest.mark.ui
 @allure.title("Авторизация в GitHub")
 @allure.description(
     "Тест проверяет авторизацию пользователя в GitHub"
@@ -64,6 +65,7 @@ def test_github_auth(driver: webdriver.Chrome) -> None:
         assert user_avatar.is_displayed()
 
 
+@pytest.mark.ui
 @allure.title("Создание репозитория")
 @allure.description(
     "Тест проверяет создание репозитория"
@@ -124,6 +126,7 @@ def test_create_repo(driver: webdriver.Chrome) -> None:
         assert "Diploma_project" in page_delete_repo.alert_message()
 
 
+@pytest.mark.ui
 @allure.title("Редактирование описания репозитория")
 @allure.description(
     "Тест проверяет изменение описания репозитория"
@@ -199,6 +202,7 @@ def test_update_descr_repo(driver: webdriver.Chrome) -> None:
         assert "Diploma_project_test" in page_delete_repo.alert_message()
 
 
+@pytest.mark.ui
 @allure.title("Создание задачи")
 @allure.description(
     "Тест проверяет создание задач"
@@ -271,6 +275,7 @@ def test_create_issue(driver: webdriver.Chrome) -> None:
         assert "Diploma_project_issue" in page_delete_repo.alert_message()
 
 
+@pytest.mark.ui
 @allure.title("Удаление репозитория")
 @allure.description(
     "Тест проверяет удаление репозитория"

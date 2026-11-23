@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webdriver import WebDriver
+from config import GITHUB_URL, GITHUB_LOGIN, GITHUB_PASSWORD
 
 
 class PageAuth:
@@ -23,7 +24,7 @@ class PageAuth:
         Открывает главную страницу GitHub
         :return: None
         """
-        self.driver.get("https://github.com/")
+        self.driver.get(GITHUB_URL)
 
     @allure.step("Переход на страницу авторизации")
     def sign_in_button(self) -> None:
@@ -42,13 +43,11 @@ class PageAuth:
         Вводит логин пользователя в соответствующее поле
         :return: None
         """
-        login = "ВВЕСТИ_ЛОГИН"
-
         login_input = self.wait.until(EC.presence_of_element_located(
             (By.ID, "login_field")
         ))
         login_input.clear()
-        login_input.send_keys(login)
+        login_input.send_keys(GITHUB_LOGIN)
 
     @allure.step("Ввод пароля")
     def input_password(self) -> None:
@@ -56,12 +55,10 @@ class PageAuth:
         Вводит пароль пользователя в соответствующее поле
         :return: None
         """
-        password = "ВВЕСТИ_ПАРОЛЬ"
-
         password_input = self.wait.until(EC.presence_of_element_located(
             (By.CSS_SELECTOR, "#password")
         ))
-        password_input.send_keys(password)
+        password_input.send_keys(GITHUB_PASSWORD)
 
     @allure.step("Нажатие на кнопку авторизации")
     def click_auth_btn(self) -> None:
