@@ -223,3 +223,5 @@ allure-results/
 allure-report/
 selenium_profile/
 chrome-profile/
+
+connection_config.ini
