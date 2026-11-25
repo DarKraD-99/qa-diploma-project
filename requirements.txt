@@ -2,4 +2,5 @@ pytest==9.1.1
 requests==2.34.2
 selenium==4.49.0
 allure-pytest==2.16.2
-testit-adapter-pytest>=2.8.1
+testit-adapter-pytest==5.2.3
+python-dotenv==1.2.4
