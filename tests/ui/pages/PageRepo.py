@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.common.exceptions import TimeoutException
 
 
 class PageRepo:
@@ -170,6 +171,27 @@ class PageRepo:
             "arguments[0].removeAttribute('target');", new_issue_btn
         )
         new_issue_btn.click()
+
+    @allure.step("Проверка загрузки страницы задач")
+    def refresh_issues(self) -> None:
+        """
+        Проверка загрузки страницы Issues.
+        Если кнопка создания задач не появилась, обновляет страницу.
+        :return: None
+        """
+        try:
+            self.wait.until(
+                EC.element_to_be_clickable(
+                    (By.CSS_SELECTOR, "a[href$='/issues/new/choose']")
+                )
+            )
+        except TimeoutException:
+            self.driver.refresh()
+            self.wait.until(
+                EC.element_to_be_clickable(
+                    (By.CSS_SELECTOR, "a[href$='/issues/new/choose']")
+                )
+            )
 
     @allure.step("Поле ввода названия задачи")
     def title_issue(self, title: str) -> None:

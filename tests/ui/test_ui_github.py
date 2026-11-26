@@ -239,6 +239,9 @@ def test_create_issue(driver: webdriver.Chrome) -> None:
     with allure.step("Кнопка с задачами"):
         page_create_issue.btn_issue()
 
+    with allure.step("Обновление страницы перед созданием задачи"):
+        page_create_issue.refresh_issues()
+
     with allure.step("Кнопка создания новой задачи"):
         page_create_issue.new_issue_btn()
 
